@@ -1,0 +1,52 @@
+:root {
+  font-size: 10px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #d3d3d3;
+  font-size: 1.8rem;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+}
+
+#app,
+.main {
+  width: 100%;
+  height: inherit;
+}
+
+.main {
+  padding: 3rem 2rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content-container {
+  display: flex;
+}
+
+.blinkie-items {
+  background-color: white;
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.canvas__container {
+  background-color: white;
+}
+
+.canvas {
+  width: 500px;
+  height: 500px;
+  /* background-color: white; */
+}
