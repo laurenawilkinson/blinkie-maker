@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'silkscreennormal';
+  src: url('../../static/fonts/slkscr-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   font-size: 10px;
 }
@@ -14,6 +21,15 @@ body {
   margin: 0;
   min-height: 100vh;
   display: flex;
+  font-family: 'silkscreennormal', sans-serif;
+}
+
+h1, h2 {
+  font-weight: normal;
+}
+
+.dragging * {
+  user-select: none;
 }
 
 #app,
@@ -41,12 +57,30 @@ body {
   margin-right: 1rem;
 }
 
+.blinkie-item {
+  display: inline-block;
+  padding: 1rem;
+}
+
 .canvas__container {
   background-color: white;
+  margin-right: 1rem;
 }
 
 .canvas {
   width: 500px;
   height: 500px;
-  /* background-color: white; */
+}
+
+.blinkie-frames {
+  width: 100px;
+  background-color: white;
+}
+
+.blinkie-frame {
+  width: 100%;
+}
+
+.blinkie-frame.active {
+  background-color: #eee;
 }
