@@ -2,9 +2,10 @@
 <div :class="{ main: true, dragging }" @click="onItemMouseUp">
   <div class="container">
     <h1>blinkie maker!</h1>
+    <button type="button" @click="saveCanvas">Save Canvas</button>
     <div class="content-container">
       <blinkie-items @item-mouse-down="onItemMouseDown" @item-mouse-move="onItemMouseMove" />
-      <blinkie-canvas v-bind="{ grid, currentItem, dragging, activeFrame, frames }" />
+      <blinkie-canvas v-bind="{ grid, currentItem, dragging, activeFrame, frames }" ref="blinkieCanvas" />
       <blinkie-frames v-model="activeFrame" :frames.sync="frames" />
     </div>
   </div>
@@ -50,7 +51,10 @@ export default {
       this.dragStart = false;
       this.dragging = false;
       this.currentItem = null;
-    }    
+    },
+    saveCanvas () {
+      this.$refs.blinkieCanvas.saveCanvas();
+    }
   }
 }
 </script>
