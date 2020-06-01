@@ -1,14 +1,22 @@
 <template>
 <div :class="{ main: true, dragging }" @click="onItemMouseUp">
-  <div class="container">
+  <div class="container container--main">
     <h1>blinkie maker!</h1>
-    <button type="button" @click="saveCanvas">Save Canvas</button>
+    <button type="button" @click="saveCanvas">Save Current Frame</button>
+    <button type="button" @click="saveAsGif">Save As Gif</button>
+    <button type="button" @click="previewGif">Preview Gif</button>
+    <img v-for="(image, i) in images" :key="i" :src="image" />
     <div class="content-container">
       <blinkie-items @item-mouse-down="onItemMouseDown" @item-mouse-move="onItemMouseMove" />
-      <blinkie-canvas v-bind="{ grid, currentItem, dragging, activeFrame, frames }" ref="blinkieCanvas" />
+      <blinkie-canvas v-bind="{ grid, currentItem, dragging, activeFrame, frames }" :images.sync="images" ref="blinkieCanvas" />
       <blinkie-frames v-model="activeFrame" :frames.sync="frames" />
     </div>
   </div>
+  <footer>
+    <div class="container">
+      Made by <a href="https://github.com/laurenawilkinson">laurenawilkinson</a> on github!
+    </div>
+  </footer>
 </div>
 </template>
 
@@ -32,7 +40,8 @@ export default {
       dragging: false,
       dragStart: false,
       activeFrame: 1,
-      frames: [ 1 ]
+      frames: [ 1 ],
+      images: []
     }
   },
   methods: {
@@ -48,12 +57,19 @@ export default {
       }
     },
     onItemMouseUp () {
+      if (!this.dragging) return;
       this.dragStart = false;
       this.dragging = false;
       this.currentItem = null;
     },
     saveCanvas () {
       this.$refs.blinkieCanvas.saveCanvas();
+    },
+    saveAsGif () {
+      this.$refs.blinkieCanvas.saveAsGif();
+    },
+    previewGif () {
+      
     }
   }
 }
