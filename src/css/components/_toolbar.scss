@@ -1,0 +1,9 @@
+.toolbar {
+  $margin: 10px;
+  height: $toolbar-height - $margin;
+  margin-bottom: $margin;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: white;
+}

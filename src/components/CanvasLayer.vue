@@ -1,6 +1,6 @@
 <template>
 <div class="canvas">
-  <canvas :id="canvasId" class="canvas"></canvas>
+  <canvas :id="canvasId" class="canvas" @keyup.delete="deleteActiveItem"></canvas>
 </div>
 </template>
 
@@ -31,6 +31,10 @@ export default {
     }
   },
   methods: {
+    clear () {
+      this.canvas.clear();
+      this.initCanvas();
+    },
     snapToGrid (x, y) {
       let left = Math.round(x / this.grid) * this.grid;
       let top = Math.round(y / this.grid) * this.grid;
@@ -51,6 +55,7 @@ export default {
         img.set({ ...this.snapToGrid(x, y), hasControls: false, hasBorders: false })
         this.currentItemObj = img;
         this.canvas.add(img);
+        this.canvas.setActiveObject(img);
       });
     },
     initCanvas () {
@@ -93,6 +98,13 @@ export default {
           this.canvas.renderAll();
         }
       })
+    },
+    deleteActiveItem () {
+      const active = this.canvas.getActiveObject();
+      if (active == undefined) return;
+
+      this.canvas.remove(active);
+
     }
   },
   mounted () {

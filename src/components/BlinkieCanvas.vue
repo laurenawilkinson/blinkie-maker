@@ -1,11 +1,16 @@
 <template>
-  <div class="canvas__container">
-    <canvas-layer 
-      v-for="frame in frames"
-      :key="frame"
-      ref="frames"
-      v-show="frame == activeFrame"
-      v-bind="{ grid, currentItem, dragging, frame }" />
+  <div class="blinkie-canvas">
+    <aside class="toolbar">
+      <button type="button" :disabled="currentFrame == null" @click="clearCurrentFrame">Clear</button>
+    </aside>
+    <div class="canvas__container">
+      <canvas-layer 
+        v-for="frame in frames"
+        :key="frame"
+        ref="frames"
+        v-show="frame == activeFrame"
+        v-bind="{ grid, currentItem, dragging, frame }" />
+    </div>
   </div>
 </template>
 
@@ -31,7 +36,21 @@ export default {
     frames: Array,
     images: Array
   },
+  computed: {
+    currentFrame () {
+      return this.frames.find(f => f === this.activeFrame) || null;
+    }
+  },
   methods: {
+    getActiveFrameIndex () {
+      return this.frames.findIndex(f => f === this.activeFrame);
+    },
+    clearCurrentFrame () {
+      const index = this.getActiveFrameIndex();
+      if (index < 0) return;
+
+      this.$refs.frames[index].clear();
+    },
     createMockCanvas (id, width, height) {
       const mock = document.createElement('canvas');
       mock.id = 'mock-canvas--id';
@@ -172,7 +191,7 @@ export default {
       
     },
     async saveCanvas () {
-      const index = this.$refs.frames.findIndex(x => x.frame === this.activeFrame);
+      const index = this.getActiveFrameIndex();
       if (index < 0) return;
       let canvasRef = this.$refs.frames[index].canvas;
       let canvas = await this.createCanvasFrame(canvasRef);
@@ -192,6 +211,16 @@ export default {
 
       this.downloadFile(url);
     }
+  },
+  mounted () {
+    document.addEventListener('keyup', e => {
+      if (e.key !== 'Delete') return;
+      
+      const index = this.getActiveFrameIndex();
+      if (index < 0) return;
+
+      this.$refs.frames[index].deleteActiveItem();
+    })
   }
 }
 </script>

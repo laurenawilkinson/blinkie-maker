@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  align-items: center;
+
+  &__text {
+    flex: 1;
+  }
+
+  &__preview {
+    height: 100px;
+    width: 100px;
+    border: 3px dashed rgb(88, 88, 88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+  }
+}
