@@ -1,0 +1,28 @@
+:root {
+  font-size: 10px;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, a {
+  font-weight: normal;
+  font-family: 'Silk Screen', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: $primary--600;
+}
+
+.dragging * {
+  user-select: none;
+  cursor: move;
+}

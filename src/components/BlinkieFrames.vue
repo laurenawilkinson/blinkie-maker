@@ -2,12 +2,13 @@
   <div class="blinkie-frames">
     <div 
       :class="{ 'blinkie-frame': true, 'active': active == frame }"
-      v-for="frame in frames"
+      v-for="(frame, index) in frames"
       :key="frame"
       @click="selectFrame(frame)">
       {{ frame }}
+      <button v-if="frames.length > 1" type="button" @click.stop="deleteFrame(index)">Delete</button>
     </div>
-    <button type="button" @click="addFrame">Add frame</button>
+    <button type="button" class="button--block" @click="addFrame">Add frame</button>
   </div>
 </template>
 
@@ -38,6 +39,13 @@ export default {
       this.localFrames.push(newFrame)
 
       this.selectFrame(newFrame);
+    },
+    deleteFrame (index) {
+      if (this.localFrames.length === 1) return;
+      this.localFrames.splice(index, 1);
+
+      const lastFrame = this.localFrames[this.localFrames.length - 1];
+      this.selectFrame(lastFrame)
     }
   }
 }

@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'Silk Screen';
+  src: url('../../static/fonts/slkscr-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$primary--400: rgb(240, 142, 142);
+$primary--600: rgb(199, 98, 98);
+
+$primary: $primary--400;

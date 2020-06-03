@@ -1,0 +1,11 @@
+button {
+  padding: 0.5rem 1rem;
+  
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
+  &.button--block {
+    width: 100%;
+  }
+}

@@ -1,0 +1,19 @@
+.blinkie-frames {
+  width: 150px;
+  background-color: white;
+  overflow-y: auto;
+
+  .blinkie-frame {
+    width: 100%;
+    padding: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #eee;
+    }
+    
+    &.active {
+      background-color: rgb(221, 221, 221);
+    }
+  }
+}

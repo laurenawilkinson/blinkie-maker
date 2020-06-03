@@ -39,7 +39,7 @@ export default {
         {
           heading: 'Letters',
           items: [
-            letters['Blinkie_Letter_A']
+            letters['letter-a']
           ]
         }
       ]

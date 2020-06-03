@@ -2,14 +2,16 @@
 <div :class="{ main: true, dragging }" @click="onItemMouseUp">
   <div class="container container--main">
     <h1>blinkie maker!</h1>
-    <button type="button" @click="saveCanvas">Save Current Frame</button>
-    <button type="button" @click="saveAsGif">Save As Gif</button>
-    <button type="button" @click="previewGif">Preview Gif</button>
-    <img v-for="(image, i) in images" :key="i" :src="image" />
+    <p class="description">An old-school blinkie maker. Drag the objects from the left onto the grid to create a scene, then add more scenes to create a blinking gif!</p>
     <div class="content-container">
       <blinkie-items @item-mouse-down="onItemMouseDown" @item-mouse-move="onItemMouseMove" />
       <blinkie-canvas v-bind="{ grid, currentItem, dragging, activeFrame, frames }" :images.sync="images" ref="blinkieCanvas" />
       <blinkie-frames v-model="activeFrame" :frames.sync="frames" />
+    </div>
+    <div class="alert">
+      <p>Export your blinkie!</p>
+      <button type="button" @click="saveCanvas">Save Current Frame</button>
+      <button type="button" @click="saveAsGif">Save As Gif</button>
     </div>
   </div>
   <footer>

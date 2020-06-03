@@ -40,14 +40,14 @@ export default {
     },
     createGif (frames, width, height) {
       return new Promise ((res, rej) => {
-        // NEED TO NOT USE PURE BLACK (0,0,0) BECAUSE 
-        // THAT'S THE TARGET TRANSPARENT COLOUR
+        // use transparent color
+        let transparent = 'rgb(255, 0, 255)';
         let exported = new GIF({
           workers: 2,
           quality: 5,
           width,
           height,
-          transparent: 'rgba(0,0,0,0)'
+          transparent
         });
   
         frames.map(frame => exported.addFrame(frame));
@@ -66,7 +66,7 @@ export default {
     async createCanvasFrame (canvas) {
       return new Promise (async (res, rej) => {
         const images = canvas.getObjects('image');
-        if (images.length === 0) return null;
+        if (images.length === 0) return res(null);
   
         let smallestX = Math.min(...images.map(x => x.left));
         let smallestY = Math.min(...images.map(x => x.top));
@@ -104,12 +104,22 @@ export default {
           images: clonedImages })
       })
     },
+    setImageOffset (image, offsetX, offsetY) {
+      image.set({ 
+        left: image.left - offsetX,
+        top: image.top - offsetY
+      })
+    },
     async saveAsGif () {
       const canvasClasses = this.$refs.frames.map(x => x.canvas);
       let canvasArray = await Promise.all(
           canvasClasses.map(async x => await this.createCanvasFrame(x)));
 
       if (canvasArray.length === 0) return;
+      if (canvasArray.filter(x => x === null).length === canvasArray.length) return;
+
+      // remove nulls from canvas array
+      canvasArray = canvasArray.filter(x => x !== null);
 
       let smallestX = Math.min(...canvasArray.map(x => x.smallestX));
       let smallestY = Math.min(...canvasArray.map(x => x.smallestY));
@@ -136,10 +146,8 @@ export default {
         let canvas = canvasArray[i];
 
         for (let image of canvas.images) {
-          image.set({ 
-            left: image.left - smallestX,
-            top: image.top - smallestY
-          })
+          // set images relevant to their offset
+          this.setImageOffset(image, smallestX, smallestY)
           clonedCanvas.add(image)
         }
 
@@ -155,7 +163,9 @@ export default {
       const reader = new FileReader();
       reader.onload = e => {
         let gifUrl = e.target.result;
-        this.$emit('update:images', [ gifUrl ])
+
+        this.downloadFile(gifUrl);
+        // this.$emit('update:images', [ gifUrl ])
       };
 
       reader.readAsDataURL(exportedGif);
@@ -172,10 +182,7 @@ export default {
       let clonedCanvas = await this.createMockCanvas(index, canvas.width, canvas.height);
 
       canvas.images.forEach(i => {
-        i.set({ 
-          left: i.left - canvas.smallestX,
-          top: i.top - canvas.smallestY
-        })
+        this.setImageOffset(i, canvas.smallestX, canvas.smallestY)
         clonedCanvas.add(i)
       })
       
