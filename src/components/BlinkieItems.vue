@@ -17,6 +17,16 @@
             :src="item"  />
         </div>
       </div>
+      <label v-if="section.heading === 'Custom'" class=" button button--block">
+        Add Custom Image
+        <input 
+          ref="imageUploader"
+          type="file"
+          accept="image/*" 
+          name="images"
+          multiple="true"
+          @change="addImages" />
+      </label>
     </div>
   </div>
 </template>
@@ -27,9 +37,15 @@ import letters from "../../static/assets/blinkie/letters/*.png";
 
 export default {
   name: 'BlinkieItems',
+  props: [ 'grid' ],
   data () {
     return {
-      sections: [
+      customImages: []
+    }
+  },
+  computed: {
+    sections () {
+      return [
         {
           heading: 'Blocks',
           items: [
@@ -41,6 +57,10 @@ export default {
           items: [
             letters['letter-a']
           ]
+        },
+        {
+          heading: 'Custom',
+          items: this.customImages
         }
       ]
     }
@@ -51,7 +71,42 @@ export default {
     },
     onItemMouseMove (item) {
       this.$emit('item-mouse-move', item);
+    },
+    getCustomImages () {
+      let images = localStorage.getItem('customImages');
+
+      return images === null
+        ? []
+        : JSON.parse(images);
+    },
+    setCustomImages (images = []) {
+      const currentImages = this.getCustomImages();
+      const newImages = [ ...currentImages, ...images ];
+      localStorage.setItem('customImages', JSON.stringify(newImages))
+      this.customImages = newImages;
+    },
+    async addImages (event) {
+      let images = event.target.files || event.dataTransfer.files;
+      let imagePromises = [];
+      
+      for (const image of images) {
+        imagePromises.push(new Promise(res => {
+          let reader = new FileReader();
+  
+          reader.readAsDataURL(image);
+          reader.onload = e => res(e.target.result);
+        }))
+      }
+
+      let urls = await Promise.all(imagePromises)
+      this.setCustomImages(urls);
+
+      this.$refs.imageUploader[0].value = '';
     }
+  },
+  mounted () {
+    // add user custom images from local storage
+    this.setCustomImages()
   }
 }
 </script>

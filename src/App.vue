@@ -11,7 +11,7 @@
       </div>
     </header>
     <section class="content-container">
-      <blinkie-items @item-mouse-down="onItemMouseDown" @item-mouse-move="onItemMouseMove" />
+      <blinkie-items v-bind="{ grid }" @item-mouse-down="onItemMouseDown" @item-mouse-move="onItemMouseMove" />
       <blinkie-canvas v-bind="{ grid, currentItem, dragging, activeFrame, frames }" :images.sync="images" ref="blinkieCanvas" />
       <blinkie-frames v-model="activeFrame" :frames.sync="frames" />
     </section>
