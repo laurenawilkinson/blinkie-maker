@@ -66,12 +66,12 @@ export default {
       });
   
       let gridLineOptions = {
-        stroke: '#ccc',
+        stroke: '#e6e6e6',
         selectable: false,
         evented: false
       }
   
-      for (var i = 0; i < (this.canvas.width / this.grid); i++) {
+      for (var i = 1; i < (this.canvas.width / this.grid); i++) {
         this.canvas.add(
           new fabric.Line([i * this.grid, 0, i * this.grid, this.canvas.width], gridLineOptions));
         this.canvas.add(
@@ -81,9 +81,9 @@ export default {
       this.initCanvasListeners();
     },
     initCanvasListeners () {
-      this.canvas.on('object:moving', (options) => { 
-        options.target.set(
-            this.snapToGrid(options.target.left, options.target.top));
+      this.canvas.on('object:moving', ({ target }) => { 
+        target.set(
+            this.snapToGrid(target.left, target.top));
       });
 
       this.canvas.on('mouse:over', ({ e }) => {
@@ -93,7 +93,8 @@ export default {
 
       this.canvas.on('mouse:move', ({ e }) => {
         if (this.dragging && this.currentItemObj !== null) {
-          this.currentItemObj.set(this.snapToGrid(e.offsetX, e.offsetY))
+          let coords = this.snapToGrid(e.offsetX, e.offsetY);
+          this.currentItemObj.set(coords)
           this.currentItemObj.setCoords();
           this.canvas.renderAll();
         }

@@ -1,14 +1,20 @@
 <template>
   <div class="blinkie-frames">
-    <div 
-      :class="{ 'blinkie-frame': true, 'active': active == frame }"
-      v-for="(frame, index) in frames"
-      :key="frame"
-      @click="selectFrame(frame)">
-      {{ frame }}
-      <button v-if="frames.length > 1" type="button" @click.stop="deleteFrame(index)">Delete</button>
+    <aside class="toolbar">
+      <button type="button" class="button--block" @click="addFrame">Add frame</button>
+    </aside>
+    <div class="blinkie-frames__container">
+      <div 
+        :class="{ 'blinkie-frame': true, 'active': active == frame }"
+        v-for="(frame, index) in frames"
+        :key="frame"
+        @click="selectFrame(frame)">
+        {{ frame }}
+        <div class="blinkie-frame__buttons">
+          <button v-if="frames.length > 1" type="button" @click.stop="deleteFrame(index)">Delete</button>
+        </div>
+      </div>
     </div>
-    <button type="button" class="button--block" @click="addFrame">Add frame</button>
   </div>
 </template>
 

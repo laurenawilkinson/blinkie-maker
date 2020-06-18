@@ -3,13 +3,14 @@
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: inherit;
 }
 
 h1, h2, a {
@@ -17,9 +18,17 @@ h1, h2, a {
   font-family: 'Silk Screen', sans-serif;
 }
 
+h1 {
+  font-size: 3.5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
 a {
   text-decoration: none;
-  color: $primary--600;
+  color: $primary--700;
 }
 
 .dragging * {

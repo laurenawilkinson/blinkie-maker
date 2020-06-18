@@ -1,14 +1,45 @@
 .button,
 button {
-  padding: 0.5rem 1rem;
+  $box-shadow-amount: 5px;
+  padding: 0.5rem 1.5rem;
+  background-color: white;
+  box-shadow: 0 $box-shadow-amount $primary--600;
+  border: 1.5px solid $primary--600;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+
+  .material-icons {
+    margin-left: -0.5rem;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    background-color: $primary--600;
+    outline: 0;
+    transform: translateY($box-shadow-amount);
+    box-shadow: none;
+    color: white;
+  }
   
   &:not(:disabled) {
     cursor: pointer;
+  }
+
+  &:disabled {
+    background-color: transparent;
   }
 
   &.button--block {
     width: 100%;
     display: block;
     text-align: center;
+  }
+
+  + .button,
+  + button {
+    margin-left: 1rem;
   }
 }

@@ -3,11 +3,19 @@
   <div class="container container--main">
     <header class="header">
       <div class="header__text">
-        <h1>blinkie maker!</h1>
-        <p class="description">An old-school blinkie maker. Drag the objects from the left onto the grid to create a scene, then add more scenes to create a blinking gif!</p>
-      </div>
-      <div class="header__preview">
-        Preview
+        <h1>
+          <span
+            v-for="(letter, i) in blinkieHeader"
+            :key="i" 
+            :style="{
+              'animation-delay': i / 4 + 's',
+              'animation-duration': blinkieHeader.length / 4 + 's'
+            }"
+            class="blinkie-block">
+            {{ letter }}
+          </span>
+        </h1>
+        <p class="description">An old-school blinkie maker. Drag the objects from the left onto the grid to create a frame, then add more frames to create a blinking gif!</p>
       </div>
     </header>
     <section class="content-container">
@@ -50,7 +58,8 @@ export default {
       dragStart: false,
       activeFrame: 1,
       frames: [ 1 ],
-      images: []
+      images: [],
+      blinkieHeader: 'blinkiemaker!'.split('')
     }
   },
   methods: {
@@ -76,9 +85,6 @@ export default {
     },
     saveAsGif () {
       this.$refs.blinkieCanvas.saveAsGif();
-    },
-    previewGif () {
-      
     }
   }
 }

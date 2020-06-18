@@ -1,9 +1,10 @@
 .alert {
   background-color: white;
-  border-radius: 5px;
   display: flex;
   align-items: center;
   padding: 2rem;
+  margin-bottom: 1rem;
+  @include container-box;
 
   p {
     flex: 1;

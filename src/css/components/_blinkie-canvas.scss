@@ -4,10 +4,9 @@
 
 .canvas__container {
   background-color: white;
+  @include container-box;
 }
 
 .canvas {
-  width: 500px;
-  height: 500px;
   cursor: move !important;
 }
