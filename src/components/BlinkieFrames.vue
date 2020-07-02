@@ -9,9 +9,12 @@
         v-for="(frame, index) in frames"
         :key="frame"
         @click="selectFrame(frame)">
-        {{ frame }}
+        <span>{{ frame }}</span>
         <div class="blinkie-frame__buttons">
-          <button v-if="frames.length > 1" type="button" @click.stop="deleteFrame(index)">Delete</button>
+          <button 
+            v-if="frames.length > 1" 
+            type="button" 
+            @click.stop="deleteFrame(index)">X</button>
         </div>
       </div>
     </div>

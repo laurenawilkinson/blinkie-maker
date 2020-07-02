@@ -56,7 +56,11 @@ export default {
         this.currentItemObj = img;
         this.canvas.add(img);
         this.canvas.setActiveObject(img);
+
+        console.log('emitting', this.canvas.getObjects('image').length)
+        this.$emit('active-items', this.canvas.getObjects('image').length);
       });
+
     },
     initCanvas () {
       this.canvas = new fabric.Canvas(this.canvasId, {
@@ -64,6 +68,7 @@ export default {
         width: 500,
         height: 500
       });
+      this.$emit('active-items', 0);
   
       let gridLineOptions = {
         stroke: '#e6e6e6',

@@ -1,23 +1,7 @@
 <template>
   <div class="blinkie-items">
-    <div 
-      v-for="section of sections" 
-      :key="section.heading"
-      class="blinkie-items__section">
-      <h2>{{ section.heading }}</h2>
-      <div class="blinkie-items__items-container">
-        <div 
-          class="blinkie-item" 
-          v-for="item of section.items"
-          :key="item"
-          @mousedown="onItemMouseDown" 
-          @mousemove="onItemMouseMove(item)" >
-          <img 
-            draggable="false"
-            :src="item"  />
-        </div>
-      </div>
-      <label v-if="section.heading === 'Custom'" class=" button button--block">
+    <aside class="toolbar">
+      <label class=" button">
         Add Custom Image
         <input 
           ref="imageUploader"
@@ -27,6 +11,26 @@
           multiple="true"
           @change="addImages" />
       </label>
+    </aside>
+    <div class="blinkie-items__container">
+      <div 
+        v-for="section of sections" 
+        :key="section.heading"
+        class="blinkie-items__section">
+        <h2>{{ section.heading }}</h2>
+        <div class="blinkie-items__items-container">
+          <div 
+            class="blinkie-item" 
+            v-for="item of section.items"
+            :key="item"
+            @mousedown="onItemMouseDown" 
+            @mousemove="onItemMouseMove(item)" >
+            <img 
+              draggable="false"
+              :src="item"  />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

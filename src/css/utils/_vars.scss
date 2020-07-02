@@ -6,6 +6,7 @@
 }
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
+$primary--50: #fff4f4;
 $primary--100: #ffebeb;
 $primary--200: #ffe1e1;
 $primary--300: #ffd1d1;
@@ -18,8 +19,3 @@ $primary: $primary--400;
 
 $main-padding: 1rem;
 $toolbar-height: 55px;
-
-@mixin container-box {
-  border: 1px solid $primary;
-  box-shadow: 4px 4px 0 $primary;
-}

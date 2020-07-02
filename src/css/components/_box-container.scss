@@ -1,0 +1,12 @@
+@mixin container-box {
+  border: 1px solid $primary;
+  box-shadow: 4px 4px 0 $primary--500;
+  background-color: white;
+}
+
+.box-container {
+  @include container-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

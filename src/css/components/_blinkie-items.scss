@@ -1,10 +1,16 @@
 
 .blinkie-items {
-  background-color: white;
   flex: 1;
+  display: flex;
   margin-right: 1rem;
-  overflow-y: auto;
-  @include container-box;
+  flex-direction: column;
+
+  &__container {
+    background-color: white;
+    flex: 1;
+    overflow-y: auto;
+    @include container-box;
+  }
 
   .blinkie-item {
     display: inline-block;

@@ -15,7 +15,9 @@
             {{ letter }}
           </span>
         </h1>
-        <p class="description">An old-school blinkie maker. Drag the objects from the left onto the grid to create a frame, then add more frames to create a blinking gif!</p>
+        <div class="box-container">
+          <p class="description">An old-school blinkie maker. Drag the objects from the left onto the grid to create a frame, then add more frames to create a blinking gif!</p>
+        </div>
       </div>
     </header>
     <section class="content-container">

@@ -16,6 +16,12 @@
     padding: 1rem;
     cursor: pointer;
     position: relative;
+    display: flex;
+    align-items: center;
+
+    span {
+      flex: 1;
+    }
 
     &:hover {
       background-color: $primary--100;

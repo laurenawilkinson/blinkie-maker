@@ -1,7 +1,10 @@
 <template>
   <div class="blinkie-canvas">
     <aside class="toolbar">
-      <button type="button" :disabled="currentFrame == null" @click="clearCurrentFrame">Clear</button>
+      <button 
+        type="button" 
+        :disabled="activeFrameItems < 1" 
+        @click="clearCurrentFrame">Clear</button>
     </aside>
     <div class="canvas__container">
       <canvas-layer 
@@ -9,7 +12,8 @@
         :key="frame"
         ref="frames"
         v-show="frame == activeFrame"
-        v-bind="{ grid, currentItem, dragging, frame }" />
+        v-bind="{ grid, currentItem, dragging, frame }"
+        @active-items="getActiveFrameItems" />
     </div>
   </div>
 </template>
@@ -36,12 +40,21 @@ export default {
     frames: Array,
     images: Array
   },
+  data () {
+    return {
+      activeFrameItems: 0
+    }
+  },
   computed: {
     currentFrame () {
       return this.frames.find(f => f === this.activeFrame) || null;
     }
   },
   methods: {
+    getActiveFrameItems (items) {
+      this.activeFrameItems = items;
+      console.log('up', this.activeFrameItems)
+    },
     getActiveFrameIndex () {
       return this.frames.findIndex(f => f === this.activeFrame);
     },

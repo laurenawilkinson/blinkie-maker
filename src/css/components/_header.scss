@@ -1,10 +1,20 @@
 .header {
   display: flex;
   align-items: center;
-  margin-top: 3rem;
+  margin: 3rem 0;
 
   &__text {
     flex: 1;
+    display: flex;
+    align-items: center;
+
+    h1 {
+      margin-right: 1rem;
+    }
+
+    .box-container {
+      flex: 1;
+    }
   }
 
   &__preview {
@@ -18,19 +28,23 @@
   }
 }
 
+$blinkie-color: $primary;
+$blinkie-color-alt: $primary--50;
+$blinkie-box-shadow: $primary--700;
+
 @keyframes blinkie-color {
-  0% { background-color: #94ff86; }
-  45% { background-color: #94ff86; }
-  50% { background-color: #e4ffe1; }
-  55% { background-color: #94ff86; }
-  100% { background-color: #94ff86; }
+  0% { background-color: $blinkie-color; }
+  45% { background-color: $blinkie-color; }
+  50% { background-color: $blinkie-color-alt; }
+  55% { background-color: $blinkie-color; }
+  100% { background-color: $blinkie-color; }
 }
 
 .blinkie-block {
   $shadow-size: 3px; 
-  background-color: #94ff86;
-  border-right: $shadow-size solid #51ca41;
-  border-bottom: $shadow-size solid #51ca41;
+  background-color: $blinkie-color;
+  border-right: $shadow-size solid $blinkie-box-shadow;
+  border-bottom: $shadow-size solid $blinkie-box-shadow;
   margin-right: $shadow-size;
   width: 40px;
   height: 40px;
