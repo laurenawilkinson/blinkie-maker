@@ -162,12 +162,19 @@ export default {
       })
     },
     async saveAsGif () {
+      this.$emit('gif-loading', true);
       const canvasClasses = this.$refs.frames.map(x => x.canvas);
       let canvasArray = await Promise.all(
           canvasClasses.map(async x => await this.createCanvasFrame(x)));
 
-      if (canvasArray.length === 0) return;
-      if (canvasArray.filter(x => x === null).length === canvasArray.length) return;
+      const returnCriteria = (
+        canvasArray.length === 0 ||
+        canvasArray.filter(x => x === null).length === canvasArray.length
+      )
+
+      this.$emit('gif-loading', !returnCriteria);
+
+      if (returnCriteria) return;
 
       // remove nulls from canvas array
       canvasArray = canvasArray.filter(x => x !== null);
@@ -220,7 +227,7 @@ export default {
       };
 
       reader.readAsDataURL(exportedGif);
-      
+      this.$emit('gif-loading', false);      
     },
     async saveCanvas () {
       const index = this.getActiveFrameIndex();

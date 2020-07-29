@@ -8,6 +8,22 @@ button {
   border-radius: 0.5rem;
   font-size: 1.6rem;
   font-weight: 800;
+  height: 35px;
+
+  img {
+    $icon-size: 22px;
+    width: $icon-size;
+    height: $icon-size;
+  }
+
+  .loading {
+    @keyframes rotate {
+      0% { transform: rotate(0) }
+      100% { transform: rotate(360deg) }
+    }
+
+    animation: rotate 1s ease-in-out infinite;
+  }
 
   .material-icons {
     margin-left: -0.5rem;
@@ -48,12 +64,6 @@ button {
     padding: 0.4rem;
     display: flex;
     align-items: center;
-    
-    img {
-      $icon-size: 22px;
-      width: $icon-size;
-      height: $icon-size;
-    }
   }
 }
 

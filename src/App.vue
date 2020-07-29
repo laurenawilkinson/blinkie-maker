@@ -26,6 +26,7 @@
         v-bind="{ grid, currentItem, dragging, activeFrame, frames }" 
         :images.sync="images" 
         ref="blinkieCanvas"
+        @gif-loading="gifLoading = $event"
         @remove-ghost-image="removeGhostImage" />
       <blinkie-frames 
         v-model="activeFrame" 
@@ -35,7 +36,10 @@
     <div class="alert">
       <p>Export your blinkie!</p>
       <button type="button" @click="saveCanvas">Save Current Frame</button>
-      <button type="button" @click="saveAsGif">Save As Gif</button>
+      <button type="button" @click="saveAsGif">
+        <img v-if="gifLoading" class="loading" src="../static/assets/icons/loading.png" />
+        <span v-else>Save As Gif</span>
+      </button>
     </div>
   </div>
   <footer>
@@ -69,6 +73,7 @@ export default {
       activeFrame: 1,
       frames: [ 1 ],
       images: [],
+      gifLoading: false,
       blinkieHeader: 'blinkiemaker!'.split('')
     }
   },
