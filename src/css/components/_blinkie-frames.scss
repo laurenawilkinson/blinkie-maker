@@ -32,9 +32,14 @@
     }
 
     &__buttons {
-      content: '';
-      top: 0;
-      right: 0;
+      display: flex;
+      opacity: 0;
+    }
+
+    &:hover {
+      .blinkie-frame__buttons {
+        opacity: 100%;
+      }
     }
   }
 }

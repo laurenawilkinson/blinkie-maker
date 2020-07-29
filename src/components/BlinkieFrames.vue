@@ -9,15 +9,21 @@
         v-for="(frame, index) in frames"
         :key="frame"
         @click="selectFrame(frame)">
-        <span>{{ frame }}</span>
+        <span>{{ index + 1 }}</span>
         <div class="blinkie-frame__buttons">
           <button 
+            class="button button--icon"
             type="button" 
-            @click.stop="duplicateFrame(frame)">Copy</button>
+            @click.stop="duplicateFrame(frame)">
+              <img src="../../static/assets/icons/copy.png" />
+            </button>
           <button 
             v-if="frames.length > 1" 
+            class="button button--icon"
             type="button" 
-            @click.stop="deleteFrame(index)">X</button>
+            @click.stop="deleteFrame(index)">
+            <img src="../../static/assets/icons/delete.png" />  
+          </button>
         </div>
       </div>
     </div>
@@ -55,7 +61,6 @@ export default {
     duplicateFrame (frame) {
       this.addFrame();
       this.$nextTick(() => this.$emit('duplicate-frame', frame))
-      
     },
     deleteFrame (index) {
       if (this.localFrames.length === 1) return;

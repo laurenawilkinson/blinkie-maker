@@ -43,4 +43,18 @@ button {
   + button {
     margin-left: 1rem;
   }
+
+  &.button--icon {
+    padding: 0.4rem;
+    display: flex;
+    align-items: center;
+    
+    img {
+      $icon-size: 22px;
+      width: $icon-size;
+      height: $icon-size;
+    }
+  }
 }
+
+
