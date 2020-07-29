@@ -57,7 +57,6 @@ export default {
         this.canvas.add(img);
         this.canvas.setActiveObject(img);
 
-        console.log('emitting', this.canvas.getObjects('image').length)
         this.$emit('active-items', this.canvas.getObjects('image').length);
       });
 
@@ -92,8 +91,10 @@ export default {
       });
 
       this.canvas.on('mouse:over', ({ e }) => {
-        if (this.dragging && this.currentItemObj == null)
+        if (this.dragging && this.currentItemObj == null) {
           this.addImage(this.currentItem, e.offsetX, e.offsetY)
+          this.$emit('remove-ghost-image');
+        }
       })
 
       this.canvas.on('mouse:move', ({ e }) => {

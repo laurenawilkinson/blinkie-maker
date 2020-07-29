@@ -13,6 +13,7 @@
         ref="frames"
         v-show="frame == activeFrame"
         v-bind="{ grid, currentItem, dragging, frame }"
+        @remove-ghost-image="$emit('remove-ghost-image')"
         @active-items="getActiveFrameItems" />
     </div>
   </div>
@@ -53,7 +54,6 @@ export default {
   methods: {
     getActiveFrameItems (items) {
       this.activeFrameItems = items;
-      console.log('up', this.activeFrameItems)
     },
     getActiveFrameIndex () {
       return this.frames.findIndex(f => f === this.activeFrame);
