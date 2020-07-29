@@ -12,6 +12,9 @@
         <span>{{ frame }}</span>
         <div class="blinkie-frame__buttons">
           <button 
+            type="button" 
+            @click.stop="duplicateFrame(frame)">Copy</button>
+          <button 
             v-if="frames.length > 1" 
             type="button" 
             @click.stop="deleteFrame(index)">X</button>
@@ -48,6 +51,11 @@ export default {
       this.localFrames.push(newFrame)
 
       this.selectFrame(newFrame);
+    },
+    duplicateFrame (frame) {
+      this.addFrame();
+      this.$nextTick(() => this.$emit('duplicate-frame', frame))
+      
     },
     deleteFrame (index) {
       if (this.localFrames.length === 1) return;

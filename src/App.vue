@@ -27,7 +27,10 @@
         :images.sync="images" 
         ref="blinkieCanvas"
         @remove-ghost-image="removeGhostImage" />
-      <blinkie-frames v-model="activeFrame" :frames.sync="frames" />
+      <blinkie-frames 
+        v-model="activeFrame" 
+        :frames.sync="frames"
+        @duplicate-frame="duplicateFrame" />
     </section>
     <div class="alert">
       <p>Export your blinkie!</p>
@@ -107,6 +110,12 @@ export default {
     },
     saveAsGif () {
       this.$refs.blinkieCanvas.saveAsGif();
+    },
+    duplicateFrame (frame) {
+      this.$refs.blinkieCanvas.duplicateFrame(frame);
+    },
+    addFrame () {
+      this.$refs.blinkieFrames.addFrame();
     },
     removeGhostImage () {
       if (this.currentGhostImg === null) return;

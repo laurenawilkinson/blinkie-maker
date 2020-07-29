@@ -52,6 +52,25 @@ export default {
     }
   },
   methods: {
+    duplicateFrame (frame) {
+      const frameItems = this.getFrameItems(frame);
+
+      const index = this.getActiveFrameIndex();
+      if (index < 0) return;
+
+      frameItems.map(x => {
+        x.clone(clonedObj => {
+          this.$refs.frames[index].pasteFabricObject(clonedObj);
+        })
+      });
+    },
+    getFrameItems (frame) {
+      const frameRef = this.$refs.frames.find(f => f.frame === frame) || null;
+
+      return frameRef !== null 
+        ? frameRef.canvas.getObjects('image')
+        : [];
+    },
     getActiveFrameItems (items) {
       this.activeFrameItems = items;
     },

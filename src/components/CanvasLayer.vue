@@ -50,6 +50,13 @@ export default {
         top
       }
     },
+    pasteFabricObject (object) {
+      object.set({ hasControls: false, hasBorders: false })
+      this.currentItemObj = object;
+      this.canvas.add(object);
+      this.canvas.setActiveObject(object);
+      this.$emit('active-items', this.canvas.getObjects('image').length);
+    },
     addImage (url, x, y) {
       fabric.Image.fromURL(url, img => {
         img.set({ ...this.snapToGrid(x, y), hasControls: false, hasBorders: false })

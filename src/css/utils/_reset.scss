@@ -3,7 +3,7 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
 * {
@@ -13,7 +13,7 @@ body {
   font-family: inherit;
 }
 
-h1, h2, a {
+h1, a {
   font-weight: normal;
   font-family: 'Silk Screen', sans-serif;
 }
@@ -23,12 +23,14 @@ h1 {
 }
 
 h2 {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
+  font-family: 'Nunito', san-serif;
+  margin: 1rem;
 }
 
 a {
   text-decoration: none;
-  color: $primary--700;
+  color: $primary--800;
 }
 
 .dragging * {
