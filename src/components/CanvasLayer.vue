@@ -33,7 +33,8 @@ export default {
   methods: {
     clear () {
       this.canvas.clear();
-      this.initCanvas();
+      this.$emit('active-items', 0);
+      this.addGridLines();
     },
     snapToGrid (x, y) {
       let left = Math.round(x / this.grid) * this.grid;
@@ -68,14 +69,7 @@ export default {
       });
 
     },
-    initCanvas () {
-      this.canvas = new fabric.Canvas(this.canvasId, {
-        selection: false,
-        width: 500,
-        height: 500
-      });
-      this.$emit('active-items', 0);
-  
+    addGridLines () {  
       let gridLineOptions = {
         stroke: '#e6e6e6',
         selectable: false,
@@ -88,6 +82,17 @@ export default {
         this.canvas.add(
           new fabric.Line([0, i * this.grid, this.canvas.width, i * this.grid], gridLineOptions))
       }
+    },
+    initCanvas () {
+      this.canvas = new fabric.Canvas(this.canvasId, {
+        selection: false,
+        width: 500,
+        height: 500
+      });
+
+      this.$emit('active-items', 0);
+
+      this.addGridLines();
 
       this.initCanvasListeners();
     },
