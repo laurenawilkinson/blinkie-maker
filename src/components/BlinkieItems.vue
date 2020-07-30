@@ -101,7 +101,7 @@ export default {
       let urls = await Promise.all(imagePromises)
       this.setCustomImages(urls);
 
-      this.$refs.imageUploader[0].value = '';
+      this.$refs.imageUploader.value = '';
     }
   },
   mounted () {

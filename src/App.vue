@@ -15,9 +15,12 @@
             {{ letter }}
           </span>
         </h1>
-        <div class="box-container">
-          <p class="description">An old-school blinkie maker. Drag the objects from the left onto the grid to create a frame, then add more frames to create a blinking gif!</p>
-        </div>
+        <img 
+          id="info" 
+          src="../static/assets/icons/info.png" 
+          alt="Info"
+          title="info"
+          @click="openInfoPrompt = true" />
       </div>
     </header>
     <section class="content-container">
@@ -47,6 +50,11 @@
       Made by <a href="https://github.com/laurenawilkinson">laurenawilkinson</a> on github!
     </div>
   </footer>
+  <div v-if="openInfoPrompt" class="overlay" @click="openInfoPrompt = false">
+    <div class="box-container">
+      <p class="description">An old-school blinkie maker. Drag the objects from the left onto the grid to create a frame, then add more frames to create a blinking gif!</p>
+    </div>
+  </div>
 </div>
 </template>
 
@@ -74,6 +82,7 @@ export default {
       frames: [ 1 ],
       images: [],
       gifLoading: false,
+      openInfoPrompt: false,
       blinkieHeader: 'blinkiemaker!'.split('')
     }
   },
@@ -133,3 +142,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  #info {
+    cursor: pointer;
+  }
+</style>

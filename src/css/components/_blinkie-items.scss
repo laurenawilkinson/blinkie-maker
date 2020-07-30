@@ -4,6 +4,7 @@
   margin-right: 1rem;
   flex-direction: column;
   max-width: 385px;
+  user-select: none;
 
   &__container {
     background-color: white;
