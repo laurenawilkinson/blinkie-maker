@@ -52,15 +52,11 @@ export default {
       return [
         {
           heading: 'Blocks',
-          items: [
-            blocks['Blinkie_BG']
-          ]
+          items: blocks
         },
         {
           heading: 'Letters',
-          items: [
-            letters['letter-a']
-          ]
+          items: letters
         },
         {
           heading: 'Custom',

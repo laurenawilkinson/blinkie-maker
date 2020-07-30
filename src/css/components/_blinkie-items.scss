@@ -1,9 +1,9 @@
 
 .blinkie-items {
-  flex: 1;
   display: flex;
   margin-right: 1rem;
   flex-direction: column;
+  max-width: 385px;
 
   &__container {
     background-color: white;
