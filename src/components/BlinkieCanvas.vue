@@ -22,6 +22,7 @@
 <script>
 import 'regenerator-runtime/runtime'
 import CanvasLayer from './CanvasLayer.vue';
+import { fabric } from 'fabric';
 
 // NOTE:  this file has been changed to hardcode 
 //        the workerScript file path. it wouldn't

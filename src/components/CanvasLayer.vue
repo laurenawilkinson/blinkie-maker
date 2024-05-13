@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { fabric } from 'fabric';
+
 export default {
   name: 'CanvasLayer',
   props: {
